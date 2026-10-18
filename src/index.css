@@ -1,0 +1,207 @@
+
+@import "tailwindcss";
+/* GENZ — cinematic landing-page atmosphere */
+
+.genz-hero {
+  isolation: isolate;
+  background: #08090d;
+}
+
+.genz-hero-image {
+  position: absolute;
+  z-index: -3;
+  inset: 0;
+  background-image: url("https://www.britishcouncil.org.mx/sites/default/files/styles/bc-landscape-1440x810/public/banner-cursos-de-ingles-para-adultos.jpg?itok=1TI-vCm-");
+  background-position: center;
+  background-size: cover;
+  transform: scale(1.04);
+  animation: genz-image-drift 24s ease-in-out infinite alternate;
+}
+
+.genz-hero-overlay {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(7, 8, 12, 0.96) 0%, rgba(7, 8, 12, 0.83) 43%, rgba(7, 8, 12, 0.48) 100%),
+    linear-gradient(0deg, #0b0b0c 0%, transparent 35%, rgba(4, 5, 8, 0.2) 100%);
+}
+
+.genz-grid {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.12;
+  background-image:
+    linear-gradient(rgba(215, 182, 109, 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(215, 182, 109, 0.16) 1px, transparent 1px);
+  background-size: 76px 76px;
+  mask-image: linear-gradient(to right, transparent, black, transparent);
+}
+
+.genz-orb {
+  position: absolute;
+  z-index: -1;
+  width: 330px;
+  height: 330px;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(100px);
+  opacity: 0.18;
+  animation: genz-orb-float 12s ease-in-out infinite alternate;
+}
+
+.genz-orb-one {
+  top: 5%;
+  right: 12%;
+  background: #c8a45d;
+}
+
+.genz-orb-two {
+  bottom: 0;
+  left: 15%;
+  width: 240px;
+  height: 240px;
+  background: #1d3d70;
+  animation-delay: -5s;
+}
+
+.genz-particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #e8cc83;
+  box-shadow: 0 0 12px rgba(232, 204, 131, 0.7);
+  opacity: 0;
+  animation: genz-particle-rise 9s ease-in-out infinite;
+}
+
+.genz-scanline {
+  position: absolute;
+  top: -30%;
+  bottom: -30%;
+  left: 0;
+  width: 1px;
+  pointer-events: none;
+  opacity: 0.25;
+  background: linear-gradient(transparent, #d7b66d, transparent);
+  animation: genz-scan 12s linear infinite;
+}
+
+.genz-gold-text {
+  background: linear-gradient(110deg, #f5e5b2, #c8a45d 48%, #fff0bd 75%, #c8a45d);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-size: 220% auto;
+  animation: genz-gold-shimmer 7s linear infinite;
+}
+
+.genz-gold-button {
+  background: linear-gradient(110deg, #c8a45d, #f0d99f, #c8a45d);
+  background-size: 200% auto;
+  transition: background-position 0.5s ease, transform 0.25s ease;
+}
+
+.genz-gold-button:hover {
+  background-position: right center;
+  transform: translateY(-2px);
+}
+
+.genz-glass-card {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: linear-gradient(
+    145deg,
+    rgba(24, 25, 29, 0.78),
+    rgba(9, 10, 14, 0.72)
+  );
+  box-shadow: 0 25px 100px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.genz-floating-label {
+  animation: genz-label-float 5s ease-in-out infinite;
+}
+
+.genz-scroll-line {
+  width: 1px;
+  height: 28px;
+  background: linear-gradient(#d7b66d, transparent);
+  animation: genz-scroll 1.8s ease-in-out infinite;
+}
+
+@keyframes genz-image-drift {
+  from { transform: scale(1.04) translateX(0); }
+  to { transform: scale(1.12) translateX(-1%); }
+}
+
+@keyframes genz-orb-float {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-35px, 28px, 0); }
+}
+
+@keyframes genz-particle-rise {
+  0% { transform: translateY(35px); opacity: 0; }
+  25% { opacity: 0.7; }
+  75% { opacity: 0.45; }
+  100% { transform: translateY(-90px); opacity: 0; }
+}
+
+@keyframes genz-scan {
+  from { transform: translateX(-5vw); }
+  to { transform: translateX(105vw); }
+}
+
+@keyframes genz-gold-shimmer {
+  to { background-position: 220% center; }
+}
+
+@keyframes genz-label-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes genz-scroll {
+  0%, 100% { transform: scaleY(0.65); opacity: 0.5; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+
+@media (max-width: 640px) {
+  .genz-hero-image {
+    background-position: 58% center;
+  }
+
+  .genz-hero-overlay {
+    background:
+      linear-gradient(90deg, rgba(7, 8, 12, 0.91), rgba(7, 8, 12, 0.69)),
+      linear-gradient(0deg, #0b0b0c 0%, transparent 50%);
+  }
+
+  .genz-orb {
+    width: 180px;
+    height: 180px;
+    filter: blur(65px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .genz-hero-image,
+  .genz-orb,
+  .genz-particle,
+  .genz-scanline,
+  .genz-gold-text,
+  .genz-floating-label,
+  .genz-scroll-line {
+    animation: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
