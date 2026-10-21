@@ -1,0 +1,5 @@
+
+User-agent: *
+Allow: /
+
+Sitemap: https://genz-education-hub.vercel.app/sitemap.xml

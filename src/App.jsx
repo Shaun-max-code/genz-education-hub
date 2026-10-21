@@ -301,29 +301,24 @@ function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.85 }}
             >
-              <div className="mb-7 inline-flex items-center gap-3 rounded-full border border-[#d7b66d]/30 bg-black/30 px-4 py-2 backdrop-blur-md">
-                <span className="h-2 w-2 animate-pulse rounded-full bg-[#d7b66d]" />
-                <span className="text-[10px] uppercase tracking-[0.18em] text-[#f0d99f]">
-                  Empowering students. Shaping futures.
-                </span>
-              </div>
 
-              <h1 className="max-w-3xl text-5xl font-semibold leading-[1.05] tracking-[-0.055em] sm:text-6xl lg:text-[78px]">
-                Think bigger.
-                <br />
-                Speak{' '}
-                <span className="genz-gold-text font-serif italic">
-                  brighter.
-                </span>
-                <br />
-                Go further.
-              </h1>
 
-              <p className="mt-7 max-w-xl text-base leading-8 text-white/75 sm:text-lg">
-                Build your English skills, prepare for international
-                proficiency tests and take confident steps towards the future
-                you imagine.
-              </p>
+<h1 className="max-w-3xl text-5xl font-semibold leading-[1.05] tracking-[-0.055em] sm:text-6xl lg:text-[78px]">
+  English skills for
+  <br />
+  your next{' '}
+  <span className="genz-gold-text font-serif italic">
+    big step.
+  </span>
+</h1>
+
+
+<p className="mt-5 max-w-2xl text-base leading-7 text-white/70 sm:text-lg">
+  GenZ Education Hub in Kozhencherry, Pathanamthitta, Kerala,
+  offers IELTS, OET, PTE and Spoken English training to help
+  students build confidence and reach their goals.
+</p>
+
 
               <p className="mt-4 flex items-center gap-2 text-sm text-white/65">
                 <MapPin size={16} className="shrink-0 text-[#d7b66d]" />
