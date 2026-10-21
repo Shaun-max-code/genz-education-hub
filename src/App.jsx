@@ -5,16 +5,40 @@ import {
   ArrowUpRight,
   BookOpen,
   Check,
+  ChevronDown,
   Globe2,
   GraduationCap,
+  MapPin,
   Menu,
   MessageCircle,
   Plane,
+  Phone,
   Sparkles,
   X,
 } from 'lucide-react'
 
 const MOCK_TEST_URL = 'https://speakinternational.tcyonline.com/login'
+
+const WHATSAPP_NUMBERS = [
+  { label: 'WhatsApp 1', display: '+91 89431 67472', number: '918943167472' },
+  { label: 'WhatsApp 2', display: '+91 85472 67472', number: '918547267472' },
+]
+
+const BUSINESS_LOCATION = 'Kozhencherry, Pathanamthitta, Kerala'
+
+function getWhatsAppLink(number, courseName = '') {
+  const message = `Hello GenZ Education Hub!
+
+I'm interested in ${
+    courseName || 'your English courses'
+  } at your Kozhencherry branch.
+
+Please share more information about the course, timings and admissions.
+
+Thank you.`
+
+  return `https://wa.me/${number}?text=${encodeURIComponent(message)}`
+}
 
 const courses = [
   {
@@ -95,7 +119,6 @@ function Brand({ footer = false }) {
         alt="GenZ Education Hub logo"
         className="h-12 w-12 rounded-full border border-[#d7b66d]/50 object-cover transition duration-500 group-hover:scale-105 sm:h-14 sm:w-14"
       />
-
       <span className="leading-tight">
         <span className="block text-lg font-semibold tracking-[0.1em] text-[#f8f5ed] sm:text-xl">
           GenZ
@@ -117,9 +140,35 @@ function SectionLabel({ children }) {
   )
 }
 
+function WhatsAppLinks({ courseName = '', compact = false }) {
+  return (
+    <div className={`flex flex-wrap gap-3 ${compact ? '' : 'items-center'}`}>
+      {WHATSAPP_NUMBERS.map((contact) => (
+        <a
+          key={contact.number}
+          href={getWhatsAppLink(contact.number, courseName)}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Enquire on ${contact.label}, ${contact.display}`}
+          className={`inline-flex items-center justify-center gap-2 font-semibold transition ${
+            compact
+              ? 'rounded-lg border border-white/15 bg-white/[0.06] px-4 py-3 text-xs text-white hover:border-[#d7b66d]/60 hover:bg-white/10'
+              : 'bg-[#11100d] px-5 py-4 text-sm text-white hover:bg-[#29251b]'
+          }`}
+        >
+          <MessageCircle size={17} />
+          {contact.label}
+          <ArrowUpRight size={14} />
+        </a>
+      ))}
+    </div>
+  )
+}
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeCourse, setActiveCourse] = useState('')
+  const [whatsappMenuOpen, setWhatsappMenuOpen] = useState(false)
 
   function selectCourse(courseName) {
     setActiveCourse(courseName)
@@ -151,7 +200,7 @@ function App() {
             <a
               href={MOCK_TEST_URL}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="text-xs text-white/65 transition hover:text-[#d7b66d]"
             >
               Mock tests ↗
@@ -199,11 +248,19 @@ function App() {
                 <a
                   href={MOCK_TEST_URL}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   onClick={() => setMenuOpen(false)}
                   className="px-3 py-3 text-sm text-[#d7b66d]"
                 >
                   Open mock tests ↗
+                </a>
+
+                <a
+                  href="#contact"
+                  onClick={() => setMenuOpen(false)}
+                  className="mx-3 mt-2 bg-[#c8a45d] px-4 py-3 text-center text-sm font-semibold text-[#11100d]"
+                >
+                  Enquire now
                 </a>
               </div>
             </motion.nav>
@@ -212,10 +269,10 @@ function App() {
       </header>
 
       <main>
-        {/* CINEMATIC LANDING PAGE */}
+        {/* HERO */}
         <section
           id="home"
-          className="genz-hero relative flex min-h-[720px] items-center overflow-hidden sm:min-h-[790px]"
+          className="genz-hero relative flex min-h-[680px] items-center overflow-hidden scroll-mt-20 sm:min-h-[750px]"
         >
           <div className="genz-hero-image" />
           <div className="genz-hero-overlay" />
@@ -238,7 +295,7 @@ function App() {
             ))}
           </div>
 
-          <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-14 px-5 py-24 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:px-12 lg:py-28">
+          <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-14 px-5 py-20 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:px-12 lg:py-28">
             <motion.div
               initial={{ opacity: 0, y: 32 }}
               animate={{ opacity: 1, y: 0 }}
@@ -268,6 +325,11 @@ function App() {
                 you imagine.
               </p>
 
+              <p className="mt-4 flex items-center gap-2 text-sm text-white/65">
+                <MapPin size={16} className="shrink-0 text-[#d7b66d]" />
+                GenZ Education Hub · Kozhencherry, Kerala
+              </p>
+
               <div className="mt-9 flex flex-wrap gap-4">
                 <a
                   href="#courses"
@@ -277,21 +339,21 @@ function App() {
                 </a>
 
                 <a
-                  href="#about"
+                  href="#contact"
                   className="inline-flex items-center gap-3 border border-white/35 bg-black/20 px-6 py-4 text-sm transition hover:border-[#d7b66d] hover:text-[#f0d99f]"
                 >
-                  Discover GenZ <ArrowUpRight size={16} />
+                  Contact us <MessageCircle size={16} />
                 </a>
               </div>
 
               <div className="mt-12 flex flex-wrap gap-x-6 gap-y-4 border-t border-white/20 pt-6">
-                {['IELTS', 'OET', 'PTE', 'Spoken English'].map((name) => (
+                {courses.map((course) => (
                   <span
-                    key={name}
+                    key={course.name}
                     className="text-xs font-medium text-white/75"
                   >
                     <span className="mr-2 text-[#d7b66d]">✦</span>
-                    {name}
+                    {course.name}
                   </span>
                 ))}
               </div>
@@ -301,7 +363,7 @@ function App() {
               initial={{ opacity: 0, x: 25 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.9, delay: 0.15 }}
-              className="relative mx-auto hidden w-full max-w-sm lg:block lg:translate-x-48"
+              className="relative mx-auto hidden w-full max-w-sm lg:block"
             >
               <div className="genz-glass-card relative rounded-2xl p-7">
                 <div className="flex items-center justify-between">
@@ -348,7 +410,6 @@ function App() {
                       Starts with learning.
                     </p>
                   </div>
-
                   <GraduationCap
                     size={28}
                     className="text-[#d7b66d]"
@@ -356,7 +417,7 @@ function App() {
                 </div>
               </div>
 
-              <div className="genz-floating-label absolute -right-10 top-16 rounded-lg border border-white/15 bg-[#111112]/90 px-4 py-3 shadow-xl backdrop-blur-xl">
+              <div className="genz-floating-label absolute -right-6 top-16 rounded-lg border border-white/15 bg-[#111112]/90 px-4 py-3 shadow-xl backdrop-blur-xl">
                 <span className="block text-[9px] uppercase tracking-widest text-white/45">
                   Learn
                 </span>
@@ -365,7 +426,7 @@ function App() {
                 </span>
               </div>
 
-              <div className="genz-floating-label absolute -bottom-7 -right-5 rounded-lg border border-[#d7b66d]/25 bg-[#111112]/90 px-4 py-3 shadow-xl backdrop-blur-xl">
+              <div className="genz-floating-label absolute -bottom-7 -right-3 rounded-lg border border-[#d7b66d]/25 bg-[#111112]/90 px-4 py-3 shadow-xl backdrop-blur-xl">
                 <span className="flex items-center gap-2 text-xs text-white/80">
                   <Globe2 size={15} className="text-[#d7b66d]" />
                   A world of possibilities
@@ -383,7 +444,7 @@ function App() {
           </a>
         </section>
 
-        {/* COURSE QUICK LINKS */}
+        {/* QUICK COURSE LINKS */}
         <section className="border-y border-white/10 bg-[#111112]">
           <div className="mx-auto grid max-w-7xl grid-cols-2 px-5 sm:px-8 md:grid-cols-4 lg:px-12">
             {courses.map((course, index) => (
@@ -404,14 +465,12 @@ function App() {
                   size={21}
                   className="shrink-0 text-[#c8a45d]"
                 />
-
                 <div>
                   <p className="text-sm font-medium">{course.name}</p>
                   <p className="mt-1 text-[10px] text-white/40">
                     Explore course
                   </p>
                 </div>
-
                 <ArrowUpRight
                   size={14}
                   className="ml-auto text-white/30 transition group-hover:text-[#d7b66d]"
@@ -436,7 +495,6 @@ function App() {
             >
               <div>
                 <SectionLabel>Find your starting point</SectionLabel>
-
                 <h2 className="text-4xl font-medium tracking-[-0.045em] sm:text-5xl">
                   The right skills.
                   <br />
@@ -445,7 +503,6 @@ function App() {
                   </span>
                 </h2>
               </div>
-
               <p className="max-w-sm text-sm leading-7 text-[#151514]/65">
                 Choose the learning path that fits your goals. Start building
                 the skills to move forward.
@@ -466,7 +523,6 @@ function App() {
                     <span className="text-xs tracking-[0.16em] text-[#151514]/40">
                       {course.number}
                     </span>
-
                     <course.icon
                       size={24}
                       strokeWidth={1.4}
@@ -477,11 +533,9 @@ function App() {
                   <h3 className="mt-9 text-3xl font-medium tracking-tight">
                     {course.name}
                   </h3>
-
                   <p className="mt-2 text-[11px] font-medium leading-5 text-[#9a7736]">
                     {course.subtitle}
                   </p>
-
                   <p className="mt-4 text-sm leading-7 text-[#151514]/65">
                     {course.description}
                   </p>
@@ -528,18 +582,15 @@ function App() {
               className="relative"
             >
               <div className="absolute -left-4 -top-4 h-24 w-24 border-l border-t border-[#c8a45d]/60" />
-
               <div className="relative flex min-h-[380px] flex-col justify-between overflow-hidden border border-white/10 bg-[#141415] p-7 sm:min-h-[440px] sm:p-10">
                 <div className="absolute -bottom-20 -right-20 h-72 w-72 rounded-full border border-[#c8a45d]/15" />
                 <div className="absolute -bottom-10 -right-10 h-52 w-52 rounded-full border border-[#c8a45d]/20" />
-
                 <div className="relative">
                   <img
                     src="/genz-logo.jpg"
                     alt="GenZ Education Hub emblem"
                     className="h-24 w-24 rounded-full object-cover sm:h-28 sm:w-28"
                   />
-
                   <p className="mt-8 max-w-sm font-serif text-4xl leading-tight sm:text-5xl">
                     Small steps can lead to{' '}
                     <span className="italic text-[#d7b66d]">
@@ -547,7 +598,6 @@ function App() {
                     </span>
                   </p>
                 </div>
-
                 <div className="relative mt-10 flex items-center justify-between border-t border-white/10 pt-5">
                   <span className="text-xs text-white/45">
                     Learn · Practice · Progress
@@ -564,7 +614,6 @@ function App() {
               transition={{ duration: 0.6 }}
             >
               <SectionLabel>A little about us</SectionLabel>
-
               <h2 className="text-4xl font-medium leading-tight tracking-[-0.045em] sm:text-5xl">
                 Education that
                 <br />
@@ -610,7 +659,6 @@ function App() {
                 transition={{ duration: 0.6 }}
               >
                 <SectionLabel>The GenZ approach</SectionLabel>
-
                 <h2 className="text-4xl font-medium tracking-[-0.045em] sm:text-5xl">
                   More than a
                   <br />
@@ -618,7 +666,6 @@ function App() {
                     test score.
                   </span>
                 </h2>
-
                 <p className="mt-6 max-w-md text-sm leading-8 text-white/55">
                   The aim is not only to prepare for an exam, but also to
                   develop communication skills and confidence that you can
@@ -639,12 +686,10 @@ function App() {
                     <span className="pt-1 text-xs tracking-widest text-[#c8a45d]">
                       {benefit.number}
                     </span>
-
                     <div>
                       <h3 className="text-xl font-medium">
                         {benefit.title}
                       </h3>
-
                       <p className="mt-3 max-w-xl text-sm leading-7 text-white/50">
                         {benefit.text}
                       </p>
@@ -654,7 +699,6 @@ function App() {
               </div>
             </div>
 
-            {/* Correctly closed paragraph, container and section */}
             <p className="mt-6 border-t border-white/10 pt-5 text-xs leading-6 text-white/50">
               Every learner's journey is unique. We focus on building skills,
               confidence, and progress through purposeful learning and practice.
@@ -662,54 +706,81 @@ function App() {
           </div>
         </section>
 
-        {/* ADMISSIONS CTA */}
+        {/* CONTACT / ENQUIRY */}
         <section
           id="contact"
-          className="scroll-mt-24 bg-[#c8a45d] text-[#11100d]"
+          className="scroll-mt-24 border-y border-white/10 bg-[#0b0b0c] text-[#f8f5ed]"
         >
-          <div className="mx-auto grid max-w-7xl gap-8 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-[1fr_auto] lg:items-center lg:px-12">
+          <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-[1fr_0.85fr] lg:items-center lg:px-12">
             <div>
-              <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.23em] text-[#11100d]/65">
-                Your next step begins here
-              </p>
+              <SectionLabel>Your next step begins here</SectionLabel>
 
-              <h2 className="max-w-2xl text-4xl font-medium leading-tight tracking-[-0.045em] sm:text-5xl">
+              <h2 className="max-w-2xl text-4xl font-medium leading-tight tracking-[-0.045em] sm:text-5xl lg:text-6xl">
                 Ready to work towards your goals?
               </h2>
 
-              <p className="mt-4 max-w-xl text-sm leading-7 text-[#11100d]/70">
-                Interested in a course? Prepare an enquiry and contact our
-                team to learn more about available training.
+              <p className="mt-6 max-w-xl text-sm leading-8 text-white/60 sm:text-base">
+                {activeCourse
+                  ? `Interested in ${activeCourse}? Message our team to ask about course details and admissions.`
+                  : 'Have questions about our courses? Connect with GenZ Education Hub for information about training and admissions.'}
+              </p>
+
+              <p className="mt-5 flex items-center gap-2 text-sm text-white/55">
+                <MapPin size={17} className="text-[#d7b66d]" />
+                {BUSINESS_LOCATION}
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-3 lg:justify-end">
-              <a
-                href={`mailto:?subject=${encodeURIComponent(
-                  `Course enquiry — GenZ Education Hub${
-                    activeCourse ? ` — ${activeCourse}` : ''
-                  }`,
-                )}&body=${encodeURIComponent(
-                  `Hello GenZ Education Hub,\n\nI'm interested in ${
-                    activeCourse || 'your courses'
-                  }.\n\nPlease share more information about the course and admissions.\n\nThank you.`,
-                )}`}
-                className="inline-flex items-center gap-3 bg-[#11100d] px-6 py-4 text-sm font-semibold text-white transition hover:bg-[#29251b]"
-              >
-                {activeCourse
-                  ? `Ask about ${activeCourse}`
-                  : 'Start an enquiry'}
+            <div className="rounded-2xl border border-[#d7b66d]/20 bg-[#121213] p-5 shadow-2xl shadow-black/20 sm:p-7">
+              <div className="mb-5">
+                <p className="text-lg font-medium">Talk to our team</p>
+                <p className="mt-1 text-xs leading-6 text-white/45">
+                  Choose a WhatsApp number to start your enquiry.
+                </p>
+              </div>
 
-                <ArrowUpRight size={17} />
-              </a>
+              <div className="space-y-3">
+                {WHATSAPP_NUMBERS.map((contact) => (
+                  <a
+                    key={contact.number}
+                    href={getWhatsAppLink(contact.number, activeCourse)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-4 rounded-xl border border-white/10 bg-white/[0.03] p-4 transition duration-300 hover:-translate-y-0.5 hover:border-[#d7b66d]/60 hover:bg-[#d7b66d]/[0.06]"
+                  >
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#d7b66d] text-[#11100d] transition group-hover:scale-105">
+                      <MessageCircle size={22} />
+                    </span>
+
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-sm font-semibold text-white">
+                        {contact.label}
+                      </span>
+                      <span className="mt-1 block text-sm text-white/50">
+                        {contact.display}
+                      </span>
+                    </span>
+
+                    <ArrowUpRight
+                      size={20}
+                      className="shrink-0 text-[#d7b66d] transition group-hover:-translate-y-1 group-hover:translate-x-1"
+                    />
+                  </a>
+                ))}
+              </div>
+
+              <div className="mt-5 flex items-center gap-2 border-t border-white/10 pt-4 text-xs leading-5 text-white/40">
+                <Check size={15} className="shrink-0 text-[#d7b66d]" />
+                Your enquiry will open in WhatsApp with a message ready to send.
+              </div>
 
               <a
                 href={MOCK_TEST_URL}
                 target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 border border-[#11100d]/30 px-5 py-4 text-sm font-semibold transition hover:bg-black/5"
+                rel="noopener noreferrer"
+                className="mt-4 flex items-center justify-center gap-2 rounded-lg border border-white/15 px-4 py-3 text-sm text-white/70 transition hover:border-[#d7b66d]/50 hover:text-[#d7b66d]"
               >
-                Mock tests <ArrowUpRight size={16} />
+                Explore mock tests <ArrowUpRight size={16} />
               </a>
             </div>
           </div>
@@ -721,12 +792,10 @@ function App() {
         <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 sm:px-8 md:grid-cols-2 lg:grid-cols-[1.3fr_0.7fr_0.7fr] lg:px-12">
           <div>
             <Brand footer />
-
             <p className="max-w-sm text-sm leading-7 text-white/45">
               Building English skills and confidence for the opportunities
               ahead.
             </p>
-
             <p className="mt-4 text-xs text-white/35">
               Kozhencherry, Pathanamthitta, Kerala
             </p>
@@ -736,7 +805,6 @@ function App() {
             <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#d7b66d]">
               Explore
             </h3>
-
             <div className="flex flex-col items-start gap-3 text-sm text-white/55">
               {navLinks.map(([label, href]) => (
                 <a
@@ -754,22 +822,21 @@ function App() {
             <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#d7b66d]">
               Our courses
             </h3>
-
             <div className="flex flex-col items-start gap-3 text-sm text-white/55">
               {courses.map((course) => (
-                <a
+                <button
                   key={course.name}
-                  href="#courses"
+                  type="button"
+                  onClick={() => selectCourse(course.name)}
                   className="transition hover:text-white"
                 >
                   {course.name}
-                </a>
+                </button>
               ))}
-
               <a
                 href={MOCK_TEST_URL}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="transition hover:text-white"
               >
                 Mock test login ↗
@@ -784,11 +851,96 @@ function App() {
               © {new Date().getFullYear()} GenZ Education Hub. All rights
               reserved.
             </span>
-
             <span>Learn today. Go further.</span>
           </div>
         </div>
       </footer>
+
+      {/* FLOATING WHATSAPP CONTACT MENU */}
+      <div className="fixed bottom-5 right-4 z-[60] flex flex-col items-end gap-3 sm:bottom-7 sm:right-7">
+        <AnimatePresence>
+          {whatsappMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: 12, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 12, scale: 0.95 }}
+              className="w-[min(310px,calc(100vw-32px))] overflow-hidden rounded-2xl border border-white/10 bg-[#111112] p-4 shadow-2xl shadow-black/40"
+            >
+              <div className="mb-4 flex items-start justify-between gap-3">
+                <div>
+                  <p className="font-semibold text-white">
+                    Chat with GenZ
+                  </p>
+                  <p className="mt-1 text-xs leading-5 text-white/50">
+                    Choose a number to enquire about our courses.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setWhatsappMenuOpen(false)}
+                  aria-label="Close WhatsApp menu"
+                  className="rounded-md p-1 text-white/60 transition hover:bg-white/10 hover:text-white"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              <div className="space-y-2">
+                {WHATSAPP_NUMBERS.map((contact) => (
+                  <a
+                    key={contact.number}
+                    href={getWhatsAppLink(contact.number, activeCourse)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setWhatsappMenuOpen(false)}
+                    className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.04] p-3 transition hover:border-[#d7b66d]/50 hover:bg-white/[0.08]"
+                  >
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#c8a45d]/15 text-[#d7b66d]">
+                      <MessageCircle size={19} />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-sm font-medium text-white">
+                        {contact.label}
+                      </span>
+                      <span className="mt-1 block text-xs text-white/50">
+                        {contact.display}
+                      </span>
+                    </span>
+                    <ArrowUpRight
+                      size={16}
+                      className="shrink-0 text-[#d7b66d]"
+                    />
+                  </a>
+                ))}
+              </div>
+
+              {activeCourse && (
+                <p className="mt-3 text-xs text-white/45">
+                  Your enquiry: {activeCourse}
+                </p>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <button
+          type="button"
+          onClick={() => setWhatsappMenuOpen((open) => !open)}
+          aria-label={
+            whatsappMenuOpen
+              ? 'Close WhatsApp contact menu'
+              : 'Contact GenZ on WhatsApp'
+          }
+          aria-expanded={whatsappMenuOpen}
+          className="flex items-center gap-3 rounded-full border border-[#e7cf95]/30 bg-[#c8a45d] px-5 py-4 font-semibold text-[#11100d] shadow-xl shadow-black/30 transition hover:-translate-y-0.5 hover:bg-[#e5ca89]"
+        >
+          {whatsappMenuOpen ? <X size={21} /> : <MessageCircle size={21} />}
+          <span className="text-sm">
+            {whatsappMenuOpen ? 'Close' : 'Chat with us'}
+          </span>
+          {!whatsappMenuOpen && <ChevronDown size={16} />}
+        </button>
+      </div>
     </div>
   )
 }
