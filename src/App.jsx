@@ -874,7 +874,7 @@ function App() {
                 aria-label="Follow GenZ Education Hub on Instagram"
                 className="inline-flex items-center gap-2 text-sm text-white/55 transition hover:text-[#d7b66d]"
               >
-                <Instagram size={18} />
+               <InstagramIcon size={18} />
                 @genzedu_learning_hub
                 <ArrowUpRight size={14} />
               </a>
