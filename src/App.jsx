@@ -19,7 +19,7 @@ import {
 
 const MOCK_TEST_URL = 'https://speakinternational.tcyonline.com/login'
 
-const GOOGLE_MAPS_URL = 'https://maps.app.goo.gl/e3nMQPHkAv6vM2sr9'
+const GOOGLE_MAPS_URL = 'https://www.google.com/maps/search/?api=1&query=GenZ+Education+Hub%2C+Poyanil+Junction%2C+Kozhencherry%2C+Pathanamthitta%2C+Kerala+689641'
 
 const INSTAGRAM_URL =
   'https://www.instagram.com/genzedu_learning_hub/'
