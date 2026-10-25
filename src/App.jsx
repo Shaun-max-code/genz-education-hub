@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import {
@@ -12,17 +13,50 @@ import {
   Menu,
   MessageCircle,
   Plane,
-  Phone,
   Sparkles,
   X,
 } from 'lucide-react'
 
 const MOCK_TEST_URL = 'https://speakinternational.tcyonline.com/login'
 
+const GOOGLE_MAPS_URL = 'https://maps.app.goo.gl/e3nMQPHkAv6vM2sr9'
+
+const INSTAGRAM_URL =
+  'https://www.instagram.com/genzedu_learning_hub/'
+
 const WHATSAPP_NUMBERS = [
-  { label: 'WhatsApp 1', display: '+91 89431 67472', number: '918943167472' },
-  { label: 'WhatsApp 2', display: '+91 85472 67472', number: '918547267472' },
+  {
+    label: 'WhatsApp 1',
+    display: '+91 89431 67472',
+    number: '918943167472',
+  },
+  {
+    label: 'WhatsApp 2',
+    display: '+91 85472 67472',
+    number: '918547267472',
+  },
 ]
+function InstagramIcon({ size = 20, className = '' }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" />
+    </svg>
+  )
+}
 
 const BUSINESS_LOCATION = 'Kozhencherry, Pathanamthitta, Kerala'
 
@@ -119,10 +153,12 @@ function Brand({ footer = false }) {
         alt="GenZ Education Hub logo"
         className="h-12 w-12 rounded-full border border-[#d7b66d]/50 object-cover transition duration-500 group-hover:scale-105 sm:h-14 sm:w-14"
       />
+
       <span className="leading-tight">
         <span className="block text-lg font-semibold tracking-[0.1em] text-[#f8f5ed] sm:text-xl">
           GenZ
         </span>
+
         <span className="mt-1 block text-[9px] tracking-[0.17em] text-[#d7b66d] sm:text-[10px]">
           EDUCATION HUB
         </span>
@@ -301,24 +337,20 @@ function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.85 }}
             >
+              <h1 className="max-w-3xl text-5xl font-semibold leading-[1.05] tracking-[-0.055em] sm:text-6xl lg:text-[78px]">
+                English skills for
+                <br />
+                your next{' '}
+                <span className="genz-gold-text font-serif italic">
+                  big step.
+                </span>
+              </h1>
 
-
-<h1 className="max-w-3xl text-5xl font-semibold leading-[1.05] tracking-[-0.055em] sm:text-6xl lg:text-[78px]">
-  English skills for
-  <br />
-  your next{' '}
-  <span className="genz-gold-text font-serif italic">
-    big step.
-  </span>
-</h1>
-
-
-<p className="mt-5 max-w-2xl text-base leading-7 text-white/70 sm:text-lg">
-  GenZ Education Hub in Kozhencherry, Pathanamthitta, Kerala,
-  offers IELTS, OET, PTE and Spoken English training to help
-  students build confidence and reach their goals.
-</p>
-
+              <p className="mt-5 max-w-2xl text-base leading-7 text-white/70 sm:text-lg">
+                GenZ Education Hub in Kozhencherry, Pathanamthitta, Kerala,
+                offers IELTS, OET, PTE and Spoken English training to help
+                students build confidence and reach their goals.
+              </p>
 
               <p className="mt-4 flex items-center gap-2 text-sm text-white/65">
                 <MapPin size={16} className="shrink-0 text-[#d7b66d]" />
@@ -724,6 +756,32 @@ function App() {
                 <MapPin size={17} className="text-[#d7b66d]" />
                 {BUSINESS_LOCATION}
               </p>
+
+              {/* GOOGLE MAPS LOCATION */}
+              <a
+                href={GOOGLE_MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Find GenZ Education Hub on Google Maps"
+                className="mt-5 inline-flex items-center gap-2 rounded-full border border-[#d7b66d]/40 px-5 py-3 text-sm font-medium text-[#e5cb8b] transition hover:bg-[#d7b66d]/10"
+              >
+                <MapPin size={18} />
+                Get Directions
+                <ArrowUpRight size={15} />
+              </a>
+
+              {/* INSTAGRAM PROFILE */}
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow GenZ Education Hub on Instagram"
+                className="ml-3 mt-5 inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-3 text-sm font-medium text-white/80 transition hover:border-[#d7b66d]/50 hover:text-[#e5cb8b]"
+              >
+                <InstagramIcon size={18} />
+                Follow us
+                <ArrowUpRight size={15} />
+              </a>
             </div>
 
             <div className="rounded-2xl border border-[#d7b66d]/20 bg-[#121213] p-5 shadow-2xl shadow-black/20 sm:p-7">
@@ -787,19 +845,47 @@ function App() {
         <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 sm:px-8 md:grid-cols-2 lg:grid-cols-[1.3fr_0.7fr_0.7fr] lg:px-12">
           <div>
             <Brand footer />
+
             <p className="max-w-sm text-sm leading-7 text-white/45">
               Building English skills and confidence for the opportunities
               ahead.
             </p>
+
             <p className="mt-4 text-xs text-white/35">
               Kozhencherry, Pathanamthitta, Kerala
             </p>
+
+            <a
+              href={GOOGLE_MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center gap-2 text-sm text-white/55 transition hover:text-[#d7b66d]"
+            >
+              <MapPin size={16} />
+              Get Directions
+              <ArrowUpRight size={14} />
+            </a>
+
+            <div className="mt-5">
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow GenZ Education Hub on Instagram"
+                className="inline-flex items-center gap-2 text-sm text-white/55 transition hover:text-[#d7b66d]"
+              >
+                <Instagram size={18} />
+                @genzedu_learning_hub
+                <ArrowUpRight size={14} />
+              </a>
+            </div>
           </div>
 
           <div>
             <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#d7b66d]">
               Explore
             </h3>
+
             <div className="flex flex-col items-start gap-3 text-sm text-white/55">
               {navLinks.map(([label, href]) => (
                 <a
@@ -817,6 +903,7 @@ function App() {
             <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#d7b66d]">
               Our courses
             </h3>
+
             <div className="flex flex-col items-start gap-3 text-sm text-white/55">
               {courses.map((course) => (
                 <button
@@ -828,6 +915,7 @@ function App() {
                   {course.name}
                 </button>
               ))}
+
               <a
                 href={MOCK_TEST_URL}
                 target="_blank"
@@ -863,13 +951,12 @@ function App() {
             >
               <div className="mb-4 flex items-start justify-between gap-3">
                 <div>
-                  <p className="font-semibold text-white">
-                    Chat with GenZ
-                  </p>
+                  <p className="font-semibold text-white">Chat with GenZ</p>
                   <p className="mt-1 text-xs leading-5 text-white/50">
                     Choose a number to enquire about our courses.
                   </p>
                 </div>
+
                 <button
                   type="button"
                   onClick={() => setWhatsappMenuOpen(false)}
@@ -893,6 +980,7 @@ function App() {
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#c8a45d]/15 text-[#d7b66d]">
                       <MessageCircle size={19} />
                     </span>
+
                     <span className="min-w-0 flex-1">
                       <span className="block text-sm font-medium text-white">
                         {contact.label}
@@ -901,6 +989,7 @@ function App() {
                         {contact.display}
                       </span>
                     </span>
+
                     <ArrowUpRight
                       size={16}
                       className="shrink-0 text-[#d7b66d]"
